@@ -1,0 +1,173 @@
+.App {
+    text-align: center;
+}
+
+.App-link {
+    color: #61dafb;
+}
+
+#header {
+    color: white;
+    background: #ff4545;
+    font-size: 1.5rem;
+}
+
+#ico {
+    animation: spin infinite 1.5s;
+    margin-left: 1rem;
+    width: 1.5rem;
+    height: 1.5rem
+}
+
+@keyframes spin {
+    0% {
+        transform: rotate(0deg);
+    }
+    85% {
+        transform: rotate(360deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+#main {
+    margin: 1rem;
+}
+
+.row {
+    display: flex;
+    justify-content: space-between;
+}
+
+.tag {
+    margin-bottom: 0.1rem;
+    font-size: 1.2rem;
+    font-weight: bold;
+    font-style: italic;
+    text-align: left;
+}
+
+.margined-tag {
+    font-size: 1.2rem;
+    font-weight: bold;
+    font-style: italic;
+    text-align: left;
+    margin-top: 2rem !important;
+    margin-bottom: 1rem !important;
+}
+
+.styled-tag {
+    margin-bottom: 0.1rem;
+    font-size: 1.2rem;
+    font-weight: bold;
+    font-style: italic;
+    text-align: left;
+    text-decoration: underline;
+}
+
+.small-tag {
+    margin-bottom: 0.1rem;
+    font-size: 1rem;
+    font-weight: bold;
+    font-style: italic;
+    text-align: left;
+}
+
+.border-dotted {
+    border: 2px dotted;
+}
+
+.row-element {
+    width: 49%;
+}
+
+.styled-element {
+    padding: 1rem;
+}
+
+.form {
+    display: grid;
+    gap: 1rem;
+}
+
+button {
+    background: #ff4545;
+    border: 1px solid #FF4742;
+    border-radius: 6px;
+    box-shadow: rgba(0, 0, 0, 0.1) 1px 2px 4px;
+    box-sizing: border-box;
+    color: #FFFFFF;
+    cursor: pointer;
+    display: inline-block;
+    font-family: nunito, roboto, proxima-nova, "proxima nova", sans-serif;
+    font-size: 1.2rem;
+    outline: 0;
+    text-align: center;
+    text-rendering: geometricprecision;
+    text-transform: none;
+    user-select: none;
+    -webkit-user-select: none;
+    touch-action: manipulation;
+    vertical-align: middle;
+}
+
+button:hover,
+button:active {
+    background-color: white;
+    background-position: 0 0;
+    color: #ff4545;
+}
+
+.button:active {
+    opacity: .5;
+}
+
+.form-field {
+    font-family: inherit;
+    width: 100%;
+    border: 0;
+    border-bottom: 2px solid black;
+    outline: 0;
+    font-size: 0.9rem;
+    color: black;
+    padding: 7px 0;
+    background: transparent;
+    transition: border-color 0.2s;
+
+    &::placeholder {
+        color: black;
+    }
+}
+
+.form-field:focus {
+    padding-bottom: 6px;
+    border-width: 3px;
+    border-image: linear-gradient(to right, #ff4545, #FF4742);
+    border-image-slice: 1;
+}
+
+.form-field{
+    &:required, &:invalid { box-shadow:none; }
+}
+
+#ender {
+    position: fixed;
+    bottom: 0;
+    color: white;
+    background: #ff4545;
+    font-size: 1rem;
+    text-align: center;
+    width: 100%;
+}
+
+#faq {
+    padding: 0.2rem;
+    text-decoration: underline;
+    font-style: italic;
+}
+
+a {
+    color: black;
+    text-decoration: underline white;
+}
