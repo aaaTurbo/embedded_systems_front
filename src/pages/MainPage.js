@@ -8,7 +8,7 @@ export default function MainPage() {
 
     const {t} = useTranslation();
 
-    if (!KeyCloakService.authenticated) {
+    if (!KeyCloakService.isLoggedIn()) {
         return <div>{t("app.notAuthenticated")}</div>;
     }
 

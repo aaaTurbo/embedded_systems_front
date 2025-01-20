@@ -6,7 +6,7 @@ function request(url, type = 'GET', body = {}) {
     };
     options.headers = {
         'Content-Type': 'application/json',
-        'Authorization': `Bearer ${KeyCloakService.token}`
+        'Authorization': `Bearer ${KeyCloakService.getToken()}`
     };
     if (type.match('POST')) {
         options.body = JSON.stringify(body);

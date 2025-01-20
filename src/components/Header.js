@@ -25,7 +25,7 @@ export default function Header() {
                     </svg>
                 </div>
                 <div>
-                    {KeyCloakService.authenticated ? (
+                    {KeyCloakService.isLoggedIn() ? (
                     <button onClick={() => KeyCloakService.logout()}>{t("app.logout")}</button>
                     ) : (
                     <button onClick={() => KeyCloakService.login()}>{t("app.login")}</button>
