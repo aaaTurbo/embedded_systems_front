@@ -17,10 +17,11 @@ keycloak.init({
     pkceMethod: 'S256'
 })
     .then(authenticated => {
-        if (authenticated) {
-            console.log('Authenticated');
+        if (!authenticated) {
+            window.location.reload();
         } else {
-            console.warn('Not authenticated');
+            console.log(keycloak.authenticated);
+            console.log(keycloak.token);
         }
     })
     .catch(err => {
