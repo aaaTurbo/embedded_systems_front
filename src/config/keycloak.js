@@ -41,7 +41,7 @@ class KeyCloakService {
     }
 
     isLoggedIn() {
-        return this.keycloak.isAuthenticated;
+        return this.keycloak.authenticated;
     }
 
 }
