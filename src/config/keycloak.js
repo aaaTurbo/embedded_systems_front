@@ -21,6 +21,7 @@ class KeyCloakService {
             pkceMethod: 'S256'
         })
             .then(authenticated => {
+                console.log(authenticated);
                 this.isAuthenticated = authenticated;
                 if (!authenticated) {
                     window.location.reload();

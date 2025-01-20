@@ -7,6 +7,7 @@ import KeyCloakService from "../config/keycloak";
 export default function MainPage() {
 
     const {t} = useTranslation();
+    console.log(KeyCloakService.isLoggedIn());
 
     if (!KeyCloakService.isLoggedIn()) {
         return <div>{t("app.notAuthenticated")}</div>;
