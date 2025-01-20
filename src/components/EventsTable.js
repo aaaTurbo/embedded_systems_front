@@ -25,20 +25,20 @@ export default function CardsTable() {
     ];
 
     useEffect(() => {
-        const fetchEvents = () => {
-            request('/api/get_events').then((data) => {
+        const fetchCards = () => {
+            request('/api/v1/event').then((data) => {
                 dispatch(setEvents(data));
             });
         };
 
-        fetchEvents();
+        fetchCards();
 
         const timer = setTimeout(() => {
-            fetchEvents();
+            fetchCards();
         }, 1000);
 
         return () => clearInterval(timer);
-    }, [events, dispatch]);
+    }, [dispatch, events]);
 
     return (<>
         <div className="row-element">

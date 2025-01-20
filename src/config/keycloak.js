@@ -1,18 +1,24 @@
+// KeycloakContext.js
+import React, { createContext, useContext, useEffect } from 'react';
 import Keycloak from 'keycloak-js';
+import { useDispatch } from 'react-redux';
+import { setAuth } from '../store';
 
-class KeyCloakService {
-    constructor() {
-        this.keycloak = new Keycloak({
-            url: 'http://localhost:9000/',
-            realm: 'devrealm',
-            clientId: 'cards-public',
-            KeycloakResponseType: 'code',
-            onLoad: 'login-required'
-        });
+const KeycloakContext = createContext();
 
-        this.isAuthenticated = false;
+// Создаем экземпляр Keycloak один раз
+const keycloak = new Keycloak({
+    url: 'http://localhost:9000/',
+    realm: 'devrealm',
+    clientId: 'cards-public',
+});
 
-        this.keycloak.init({
+export const KeycloakProvider = ({ children }) => {
+    const dispatch = useDispatch();
+
+    useEffect(() => {
+        // Инициализация Keycloak
+        keycloak.init({
             onLoad: 'login-required',
             responseType: "code",
             silentCheckSsoRedirectUri: window.location.origin + "/silent-check-sso.html",
@@ -21,30 +27,35 @@ class KeyCloakService {
             pkceMethod: 'S256'
         })
             .then(authenticated => {
-                console.log(authenticated);
-                this.isAuthenticated = authenticated;
-                if (!authenticated) {
-                    window.location.reload();
-                }
+                dispatch(setAuth({
+                    status: authenticated,
+                    token: authenticated ? keycloak.token : null
+                }));
+            })
+            .catch(err => {
+                console.error('Failed to initialize Keycloak', err);
+                dispatch(setAuth({
+                    status: false,
+                    token: null
+                }));
             });
-    }
+    }, [dispatch]);
 
-    login() {
-        this.keycloak.login();
-    }
+    const login = () => {
+        keycloak.login();
+    };
 
-    logout() {
-        this.keycloak.logout();
-    }
+    const logout = () => {
+        keycloak.logout();
+    };
 
-    getToken() {
-        return this.keycloak.token;
-    }
+    return (
+        <KeycloakContext.Provider value={{ keycloak, login, logout }}>
+            {children}
+        </KeycloakContext.Provider>
+    );
+};
 
-    isLoggedIn() {
-        return this.isAuthenticated;
-    }
-
-}
-
-export default new KeyCloakService();
+export const useKeycloak = () => {
+    return useContext(KeycloakContext);
+};

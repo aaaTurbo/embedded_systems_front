@@ -1,6 +1,6 @@
 import Table from './Table';
 import {useTranslation} from "react-i18next";
-import {setCards, deleteCard} from '../store';
+import { setCards, deleteCard } from '../store';
 import {useDispatch, useSelector} from "react-redux";
 import {request} from "../Util";
 import {useEffect} from "react";
@@ -17,14 +17,8 @@ export default function CardsTable() {
     ];
 
     useEffect(() => {
-        request('/api/get_cards').then((data) => {
-            dispatch(setCards(data));
-        });
-    }, [dispatch]);
-
-    useEffect(() => {
         const fetchCards = () => {
-            request('/api/get_cards').then((data) => {
+            request('/api/v1/card').then((data) => {
                 dispatch(setCards(data));
             });
         };
@@ -36,10 +30,10 @@ export default function CardsTable() {
         }, 1000);
 
         return () => clearInterval(timer);
-    }, [cards, dispatch]);
+    }, [dispatch, cards]);
 
     const handleDeleteCard = (id) => {
-        request('/api/delete/' + id, 'DELETE').then((res) => {
+        request('/api/v1/card/' + id, 'DELETE').then((res) => {
             if (res) {
                 dispatch(deleteCard(id));
             }

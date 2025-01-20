@@ -1,19 +1,20 @@
 import "../config/i18n";
-import {useTranslation} from "react-i18next";
-import KeyCloakService from "../config/keycloak";
+import { useTranslation } from "react-i18next";
+import { useSelector } from "react-redux";
+import { useKeycloak } from "../config/keycloak"; // Импортируйте useKeycloak
 
 export default function Header() {
     const { t, i18n } = useTranslation();
+    const { login, logout } = useKeycloak(); // Вызовите useKeycloak вне условий
+
+    const auth = useSelector((state) => state.auth);
 
     const changeLanguage = () => {
-        if (i18n.language.match("en")) {
-            i18n.changeLanguage("ru");
-        } else {
-            i18n.changeLanguage("en");
-        }
+        const newLang = i18n.language === "en" ? "ru" : "en";
+        i18n.changeLanguage(newLang);
     };
 
-    return (<>
+    return (
         <header className="container" id="header">
             <div className="row">
                 <div>
@@ -25,14 +26,14 @@ export default function Header() {
                     </svg>
                 </div>
                 <div>
-                    {KeyCloakService.isLoggedIn() ? (
-                    <button onClick={() => KeyCloakService.logout()}>{t("app.logout")}</button>
+                    {auth.status ? (
+                        <button onClick={logout}>{t("app.logout")}</button>
                     ) : (
-                    <button onClick={() => KeyCloakService.login()}>{t("app.login")}</button>
+                        <button onClick={login}>{t("app.login")}</button>
                     )}
-                    <button onClick={() => changeLanguage()}>{t("language")}</button>
+                    <button onClick={changeLanguage}>{t("language")}</button>
                 </div>
             </div>
         </header>
-    </>);
+    );
 }

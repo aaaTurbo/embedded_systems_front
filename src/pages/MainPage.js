@@ -2,14 +2,15 @@ import CardsTable from "../components/CardsTable";
 import EventsTable from "../components/EventsTable";
 import ControlPanel from "../components/ControlPanel";
 import {useTranslation} from "react-i18next";
-import KeyCloakService from "../config/keycloak";
+import {useSelector} from "react-redux";
 
 export default function MainPage() {
 
     const {t} = useTranslation();
-    console.log(KeyCloakService.isLoggedIn());
 
-    if (!KeyCloakService.isLoggedIn()) {
+    const auth = useSelector((state) => state.auth);
+
+    if (!auth.status) {
         return <div>{t("app.notAuthenticated")}</div>;
     }
 

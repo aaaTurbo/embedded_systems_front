@@ -34,10 +34,32 @@ const eventsSlice = createSlice({
 
 export const { setEvents } = eventsSlice.actions;
 
+const authSlice = createSlice({
+    name: 'auth',
+    initialState: {
+        status: false,
+        token: "",
+    },
+    reducers: {
+        setAuth: (state, action) => {
+            state.status = action.payload.status;
+            state.token = action.payload.token;
+        },
+        clearAuth: (state) => {
+            state.status = false;
+            state.token = "";
+        }
+    },
+});
+
+
+export const { setAuth } = authSlice.actions;
+
 const store = configureStore({
     reducer: {
         cards: cardsSlice.reducer,
-        events: eventsSlice.reducer
+        events: eventsSlice.reducer,
+        auth: authSlice.reducer
     },
 });
 

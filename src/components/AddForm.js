@@ -13,7 +13,7 @@ export default function AddForm() {
 
     const handleSubmit = (event) => {
         event.preventDefault();
-        request('/api/add_card', 'POST', {id: id, name: name}).then(
+        request('/api/v1/card/add', 'POST', {id: id, name: name}).then(
             res => {
                 if (res) {
                     dispatch(addCard({id: id, name: name}));

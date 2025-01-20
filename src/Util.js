@@ -1,12 +1,16 @@
-import KeyCloakService from "./config/keycloak"
+import {useSelector} from "react-redux";
 
 function request(url, type = 'GET', body = {}) {
+
+    // eslint-disable-next-line react-hooks/rules-of-hooks
+    const auth = useSelector((state) => state.token.data);
+
     let options = {
         method: type,
     };
     options.headers = {
         'Content-Type': 'application/json',
-        'Authorization': `Bearer ${KeyCloakService.getToken()}`
+        'Authorization': `Bearer ${auth.token}`
     };
     if (type.match('POST')) {
         options.body = JSON.stringify(body);
