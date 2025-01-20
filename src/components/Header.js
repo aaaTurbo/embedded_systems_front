@@ -1,10 +1,9 @@
 import "../config/i18n";
 import {useTranslation} from "react-i18next";
-import { useKeycloak } from '@react-keycloak/web';
+import keycloak from "../config/keycloak";
 
 export default function Header() {
     const { t, i18n } = useTranslation();
-    const { keycloak } = useKeycloak();
 
     const changeLanguage = () => {
         if (i18n.language.match("en")) {
