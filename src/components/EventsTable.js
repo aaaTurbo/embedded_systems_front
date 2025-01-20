@@ -1,6 +1,6 @@
 import Table from './Table';
 import {useTranslation} from "react-i18next";
-import {setCards, setEvents} from '../store';
+import {setEvents} from '../store';
 import {useDispatch, useSelector} from "react-redux";
 import {request} from "../Util";
 import {useEffect} from "react";
@@ -9,6 +9,9 @@ export default function CardsTable() {
     const {t} = useTranslation();
     const dispatch = useDispatch();
     const events = useSelector((state) => state.events.data);
+
+    const auth = useSelector((state) => state.auth);
+
     const columns = [
         {name: 'ID', selector: row => row.id, id: 'id'},
         {name: t('eventsTable.name'), selector: row => row.name},
@@ -25,20 +28,24 @@ export default function CardsTable() {
     ];
 
     useEffect(() => {
-        const fetchCards = () => {
-            request('/api/v1/event').then((data) => {
-                dispatch(setEvents(data));
+        const fetchEvents = () => {
+            request('/api/v1/event', auth.token).then((data) => {
+                if (data) {
+                    dispatch(setEvents(data));
+                } else {
+                    dispatch(setEvents([]));
+                }
             });
         };
 
-        fetchCards();
+        fetchEvents();
 
         const timer = setTimeout(() => {
-            fetchCards();
+            fetchEvents();
         }, 1000);
 
         return () => clearInterval(timer);
-    }, [dispatch, events]);
+    }, [dispatch, auth]);
 
     return (<>
         <div className="row-element">

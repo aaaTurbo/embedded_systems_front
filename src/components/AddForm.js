@@ -2,7 +2,7 @@ import React, {useState} from 'react';
 import {useTranslation} from 'react-i18next';
 import '../config/i18n';
 import {request} from "../Util";
-import {useDispatch} from 'react-redux';
+import {useDispatch, useSelector} from 'react-redux';
 import {addCard} from '../store';
 
 export default function AddForm() {
@@ -11,9 +11,11 @@ export default function AddForm() {
     const [name, setName] = useState('');
     const [id, setId] = useState('');
 
+    const auth = useSelector((state) => state.auth);
+
     const handleSubmit = (event) => {
         event.preventDefault();
-        request('/api/v1/card/add', 'POST', {id: id, name: name}).then(
+        request('/api/v1/card/add', auth.token, 'POST', {id: id, name: name}).then(
             res => {
                 if (res) {
                     dispatch(addCard({id: id, name: name}));

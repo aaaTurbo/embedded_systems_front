@@ -10,10 +10,10 @@ const root = ReactDOM.createRoot(document.getElementById('root'));
 
 root.render(
     <Provider store={store}>
-        <React.StrictMode>
-            <KeycloakProvider>
-                <App/>
-            </KeycloakProvider>
-        </React.StrictMode>
+        <KeycloakProvider>
+            <React.StrictMode>
+                <App />
+            </React.StrictMode>
+        </KeycloakProvider>
     </Provider>,
 );

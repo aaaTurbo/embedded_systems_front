@@ -1,12 +1,10 @@
-// KeycloakContext.js
-import React, { createContext, useContext, useEffect } from 'react';
+import { createContext, useContext, useEffect } from 'react';
 import Keycloak from 'keycloak-js';
 import { useDispatch } from 'react-redux';
 import { setAuth } from '../store';
 
 const KeycloakContext = createContext();
 
-// Создаем экземпляр Keycloak один раз
 const keycloak = new Keycloak({
     url: 'http://localhost:9000/',
     realm: 'devrealm',
@@ -17,7 +15,6 @@ export const KeycloakProvider = ({ children }) => {
     const dispatch = useDispatch();
 
     useEffect(() => {
-        // Инициализация Keycloak
         keycloak.init({
             onLoad: 'login-required',
             responseType: "code",

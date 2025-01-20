@@ -1,16 +1,11 @@
-import {useSelector} from "react-redux";
-
-function request(url, type = 'GET', body = {}) {
-
-    // eslint-disable-next-line react-hooks/rules-of-hooks
-    const auth = useSelector((state) => state.token.data);
+function request(url, token = "", type = 'GET', body = {}) {
 
     let options = {
         method: type,
     };
     options.headers = {
         'Content-Type': 'application/json',
-        'Authorization': `Bearer ${auth.token}`
+        'Authorization': `Bearer ${token}`
     };
     if (type.match('POST')) {
         options.body = JSON.stringify(body);

@@ -10,30 +10,36 @@ export default function CardsTable() {
     const dispatch = useDispatch();
     const cards = useSelector((state) => state.cards.data);
 
+    const auth = useSelector((state) => state.auth);
+
+    useEffect(() => {
+        const fetchCards = () => {
+            request('/api/v1/card', auth.token).then((data) => {
+                if (data) {
+                    dispatch(setCards(data));
+                } else {
+                    dispatch(setCards([]))
+                }
+            });
+        };
+
+        fetchCards();
+
+        const timer = setInterval(() => {
+            fetchCards();
+        }, 1000);
+
+        return () => clearInterval(timer);
+    }, [dispatch, auth]);
+
     const columns = [
         {name: 'ID', selector: row => row.id, id: 'id'},
         {name: t('cardsTable.name'), selector: row => row.name},
         {name: t('cardsTable.delete'), cell: row => <button onClick={() => handleDeleteCard(row.id)}>X</button>}
     ];
 
-    useEffect(() => {
-        const fetchCards = () => {
-            request('/api/v1/card').then((data) => {
-                dispatch(setCards(data));
-            });
-        };
-
-        fetchCards();
-
-        const timer = setTimeout(() => {
-            fetchCards();
-        }, 1000);
-
-        return () => clearInterval(timer);
-    }, [dispatch, cards]);
-
     const handleDeleteCard = (id) => {
-        request('/api/v1/card/' + id, 'DELETE').then((res) => {
+        request('/api/v1/card/' + id, auth.token, 'DELETE').then((res) => {
             if (res) {
                 dispatch(deleteCard(id));
             }
