@@ -1,14 +1,17 @@
+import keycloak from "./config/keycloak"
+
 function request(url, type = 'GET', body = {}) {
     let options = {
         method: type,
     };
+    options.headers = {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${keycloak.token}`
+    };
     if (type.match('POST')) {
         options.body = JSON.stringify(body);
-        options.headers = {
-            'Content-Type': 'application/json'
-        };
     }
-    return fetch('http://localhost:3001' + url, options).then(async (response) => {
+    return fetch('http://localhost:8080' + url, options).then(async (response) => {
         if (!response.ok) {
             throw new Error(response.status + ': Network response was not ok');
         }
