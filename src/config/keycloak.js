@@ -10,6 +10,8 @@ class KeyCloakService {
             onLoad: 'login-required'
         });
 
+        this.isAuthenticated = false;
+
         this.keycloak.init({
             onLoad: 'login-required',
             responseType: "code",
@@ -19,12 +21,10 @@ class KeyCloakService {
             pkceMethod: 'S256'
         })
             .then(authenticated => {
+                this.isAuthenticated = authenticated;
                 if (!authenticated) {
                     window.location.reload();
                 }
-            })
-            .catch(err => {
-                console.error('Failed to initialize Keycloak', err);
             });
     }
 
@@ -41,7 +41,7 @@ class KeyCloakService {
     }
 
     isLoggedIn() {
-        return this.keycloak.authenticated;
+        return this.isAuthenticated;
     }
 
 }
