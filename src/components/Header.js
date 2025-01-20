@@ -1,6 +1,6 @@
 import "../config/i18n";
 import {useTranslation} from "react-i18next";
-import keycloak from "../config/keycloak";
+import KeyCloakService from "../config/keycloak";
 
 export default function Header() {
     const { t, i18n } = useTranslation();
@@ -25,10 +25,10 @@ export default function Header() {
                     </svg>
                 </div>
                 <div>
-                    {keycloak.authenticated ? (
-                    <button onClick={() => keycloak.logout()}>{t("app.logout")}</button>
+                    {KeyCloakService.authenticated ? (
+                    <button onClick={() => KeyCloakService.logout()}>{t("app.logout")}</button>
                     ) : (
-                    <button onClick={() => keycloak.login()}>{t("app.login")}</button>
+                    <button onClick={() => KeyCloakService.login()}>{t("app.login")}</button>
                     )}
                     <button onClick={() => changeLanguage()}>{t("language")}</button>
                 </div>

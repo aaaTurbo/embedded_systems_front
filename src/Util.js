@@ -1,4 +1,4 @@
-import keycloak from "./config/keycloak"
+import KeyCloakService from "./config/keycloak"
 
 function request(url, type = 'GET', body = {}) {
     let options = {
@@ -6,7 +6,7 @@ function request(url, type = 'GET', body = {}) {
     };
     options.headers = {
         'Content-Type': 'application/json',
-        'Authorization': `Bearer ${keycloak.token}`
+        'Authorization': `Bearer ${KeyCloakService.token}`
     };
     if (type.match('POST')) {
         options.body = JSON.stringify(body);
