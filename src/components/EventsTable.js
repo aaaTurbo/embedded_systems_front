@@ -1,6 +1,6 @@
 import Table from './Table';
 import {useTranslation} from "react-i18next";
-import {setEvents} from '../store';
+import {setCards, setEvents} from '../store';
 import {useDispatch, useSelector} from "react-redux";
 import {request} from "../Util";
 import {useEffect} from "react";
@@ -25,10 +25,20 @@ export default function CardsTable() {
     ];
 
     useEffect(() => {
-        request('/api/get_events').then((data) => {
-            dispatch(setEvents(data));
-        });
-    }, [dispatch]);
+        const fetchEvents = () => {
+            request('/api/get_events').then((data) => {
+                dispatch(setEvents(data));
+            });
+        };
+
+        fetchEvents();
+
+        const timer = setTimeout(() => {
+            fetchEvents();
+        }, 1000);
+
+        return () => clearInterval(timer);
+    }, [events, dispatch]);
 
     return (<>
         <div className="row-element">

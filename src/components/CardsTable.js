@@ -1,6 +1,6 @@
 import Table from './Table';
 import {useTranslation} from "react-i18next";
-import { setCards, deleteCard } from '../store';
+import {setCards, deleteCard} from '../store';
 import {useDispatch, useSelector} from "react-redux";
 import {request} from "../Util";
 import {useEffect} from "react";
@@ -22,8 +22,24 @@ export default function CardsTable() {
         });
     }, [dispatch]);
 
+    useEffect(() => {
+        const fetchCards = () => {
+            request('/api/get_cards').then((data) => {
+                dispatch(setCards(data));
+            });
+        };
+
+        fetchCards();
+
+        const timer = setTimeout(() => {
+            fetchCards();
+        }, 1000);
+
+        return () => clearInterval(timer);
+    }, [cards, dispatch]);
+
     const handleDeleteCard = (id) => {
-        request('/api/delete_card', 'POST', { id }).then((res) => {
+        request('/api/delete/' + id, 'DELETE').then((res) => {
             if (res) {
                 dispatch(deleteCard(id));
             }
