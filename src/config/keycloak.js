@@ -46,4 +46,4 @@ class KeyCloakService {
 
 }
 
-export default KeyCloakService;
+export default new KeyCloakService();
