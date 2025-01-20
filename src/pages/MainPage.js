@@ -8,6 +8,8 @@ export default function MainPage() {
 
     const {t} = useTranslation();
 
+    console.log(keycloak.authenticated);
+
     if (!keycloak.authenticated) {
         return <div>{t("app.notAuthenticated")}</div>;
     }
