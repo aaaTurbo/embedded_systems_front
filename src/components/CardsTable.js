@@ -49,15 +49,19 @@ export default function CardsTable() {
     return (<>
         <div className="row-element">
             <div className="tag styled-tag">{t('cardsTable.tag')}</div>
-            <Table className="table border-dotted"
-                   columns={columns}
-                   data={cards}
-                   defaultSortFieldId={'id'}
-                   pagination
-                   paginationPerPage={5}
-                   paginationRowsPerPageOptions={[5, 10, 20, 30]}
-                   responsive
-            />
+            {cards.length > 0 ? (
+                <Table className="table border-dotted"
+                       columns={columns}
+                       data={cards}
+                       defaultSortFieldId={'id'}
+                       pagination
+                       paginationPerPage={5}
+                       paginationRowsPerPageOptions={[5, 10, 20, 30]}
+                       responsive
+                />
+            ) : (
+                <p>{t("cardsTable.empty")}</p>
+            )}
         </div>
     </>);
 }

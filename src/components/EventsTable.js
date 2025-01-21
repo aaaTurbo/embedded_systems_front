@@ -50,14 +50,18 @@ export default function CardsTable() {
     return (<>
         <div className="row-element">
             <div className="tag styled-tag">{t('eventsTable.tag')}</div>
-            <Table className="table border-dotted"
-                   columns={columns}
-                   data={events}
-                   pagination
-                   paginationPerPage={5}
-                   paginationRowsPerPageOptions={[5, 10, 20, 30]}
-                   responsive
-            />
+            {events.length > 0 ? (
+                <Table className="table border-dotted"
+                       columns={columns}
+                       data={events}
+                       pagination
+                       paginationPerPage={5}
+                       paginationRowsPerPageOptions={[5, 10, 20, 30]}
+                       responsive
+                />
+            ) : (
+                <p>{t("eventsTable.empty")}</p> // Сообщение о том, что данных нет
+            )}
         </div>
     </>);
 }
