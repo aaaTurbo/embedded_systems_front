@@ -14,17 +14,20 @@ export default function EventsTable() {
 
     const columns = [
         {name: 'ID', selector: row => row.id, id: 'id'},
-        {name: t('eventsTable.name'), selector: row => row.name},
+        {name: t('eventsTable.name'), selector: row => row.username},
+        {name: t('eventsTable.cardId'), selector: row => row.cardId },
         {
             name: t('eventsTable.event'), selector: row => {
-                if (row.event.match("entered")) {
-                    return t("event.entered");
+                if (row.type.match("BEGIN")) {
+                    return t("event.begin");
+                } else if (row.type.match("END")) {
+                    return t("event.end");
                 } else {
-                    return t("event.left");
+                    return t("event.denied");
                 }
             }
         },
-        {name: t('eventsTable.dt'), selector: row => row.dt}
+        {name: t('eventsTable.dt'), selector: row => row.at}
     ];
 
     useEffect(() => {
