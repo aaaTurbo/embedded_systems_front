@@ -13,8 +13,8 @@ export default function EventsTable() {
     const auth = useSelector((state) => state.auth);
 
     const columns = [
-        {name: 'ID', selector: row => row.id, id: 'id'},
-        {name: t('eventsTable.name'), selector: row => row.username},
+        {name: 'ID', selector: row => row.id, id: 'id', width: "3rem"},
+        {name: t('eventsTable.name'), selector: row => row.username, width: "5rem"},
         {name: t('eventsTable.cardId'), selector: row => row.cardId },
         {
             name: t('eventsTable.event'), selector: row => {
@@ -25,9 +25,9 @@ export default function EventsTable() {
                 } else {
                     return t("event.denied");
                 }
-            }
+            }, width: "5rem"
         },
-        {name: t('eventsTable.dt'), selector: row => row.at}
+        {name: t('eventsTable.dt'), selector: row => row.at, width: "10rem"}
     ];
 
     useEffect(() => {
