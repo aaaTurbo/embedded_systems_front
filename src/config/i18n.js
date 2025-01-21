@@ -12,14 +12,16 @@ i18n
                         tag: "Users and Cards",
                         name: "Name",
                         delete: "Delete",
-                        empty: "There are no registered cards"
+                        empty: "There are no registered cards",
+                        cardId: "Card ID"
                     },
                     eventsTable: {
                         tag: "Events",
                         name: "Name",
                         event: "Event",
                         dt: "DT",
-                        empty: "There are no detected events"
+                        empty: "There are no detected events",
+                        cardId: "Card ID"
                     },
                     controls: {
                         tag: "Controls"
@@ -56,14 +58,16 @@ i18n
                         tag: "Пользователи и карты",
                         name: "Имя",
                         delete: "Удалить",
-                        empty: "Нет зарегистрированных карт"
+                        empty: "Нет зарегистрированных карт",
+                        cardId: "Индентификатор Карты"
                     },
                     eventsTable: {
                         tag: "События",
                         name: "Имя",
                         event: "Событие",
                         dt: "ДВ",
-                        empty: "Нет зарегистрированных событий"
+                        empty: "Нет зарегистрированных событий",
+                        cardId: "Индентификатор Карты"
                     },
                     controls: {
                         tag: "Управление"
