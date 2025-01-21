@@ -40,7 +40,7 @@ export default function EventsTable() {
 
         fetchEvents();
 
-        const timer = setTimeout(() => {
+        const timer = setInterval(() => {
             fetchEvents();
         }, 1000);
 
