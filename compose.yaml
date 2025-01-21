@@ -1,0 +1,19 @@
+services:
+
+    frontend:
+      platform: linux/amd64
+      restart: on-failure
+      build:
+        context: .
+        dockerfile: Dockerfile
+      ports:
+        - "8080:8080"
+      volumes:
+        - ./nginx/nginx.conf:/etc/nginx/nginx.conf
+      environment:
+        - NODE_ENV=production
+      container_name: "embedded-systems-front"
+
+networks:
+  default:
+    driver: bridge
