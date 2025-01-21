@@ -20,7 +20,7 @@ export const KeycloakProvider = ({ children }) => {
             responseType: "code",
             silentCheckSsoRedirectUri: window.location.origin + "/silent-check-sso.html",
             checkLoginIframe: false,
-            redirectUri: 'http://localhost:80/',
+            redirectUri: 'http://localhost:8080/',
             pkceMethod: 'S256'
         })
             .then(authenticated => {
