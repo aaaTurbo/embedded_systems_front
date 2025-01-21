@@ -5,7 +5,7 @@ import {useDispatch, useSelector} from "react-redux";
 import {request} from "../Util";
 import {useEffect} from "react";
 
-export default function CardsTable() {
+export default function EventsTable() {
     const {t} = useTranslation();
     const dispatch = useDispatch();
     const events = useSelector((state) => state.events.data);
