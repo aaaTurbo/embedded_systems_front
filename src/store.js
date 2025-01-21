@@ -23,7 +23,7 @@ export const { setCards, addCard, deleteCard } = cardsSlice.actions;
 const eventsSlice = createSlice({
     name: 'events',
     initialState: {
-        events: [],
+        data: [],
     },
     reducers: {
         setEvents: (state, action) => {
