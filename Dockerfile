@@ -10,5 +10,5 @@ RUN npm run build
 FROM nginx:latest AS PROD
 COPY --from=builder /app/build /usr/share/nginx/html
 COPY nginx/nginx.conf /etc/nginx/nginx.conf
-EXPOSE 8080/tcp
+EXPOSE 80/tcp
 CMD ["/usr/sbin/nginx", "-g", "daemon off;"]
