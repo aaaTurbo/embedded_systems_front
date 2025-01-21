@@ -28,6 +28,31 @@ export const KeycloakProvider = ({ children }) => {
                     status: authenticated,
                     token: authenticated ? keycloak.token : null
                 }));
+
+                if (authenticated) {
+                    const refreshToken = () => {
+                        keycloak.updateToken(30)
+                            .then((refreshed) => {
+                                if (refreshed) {
+                                    dispatch(setAuth({
+                                        status: true,
+                                        token: keycloak.token
+                                    }));
+                                }
+                            })
+                            .catch(err => {
+                                console.error('Failed to refresh token', err);
+                                dispatch(setAuth({
+                                    status: false,
+                                    token: null
+                                }));
+                            });
+                    };
+
+                    const intervalId = setInterval(refreshToken, 60000);
+
+                    return () => clearInterval(intervalId);
+                }
             })
             .catch(err => {
                 console.error('Failed to initialize Keycloak', err);
