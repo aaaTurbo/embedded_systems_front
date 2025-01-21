@@ -38,8 +38,9 @@ i18n
                         period: " Spring/winter 2024-2025 ITMO, Embedded systems"
                     },
                     event: {
-                        entered: "Entered",
-                        left: "Left"
+                        begin: "BEGIN",
+                        end: "END",
+                        denied: "DENIED"
                     },
                     app: {
                         notAuthenticated: "You are not authenticated",
@@ -81,8 +82,9 @@ i18n
                         period: " Весна/зима 2024-2025 ИТМО, Встроенные системы"
                     },
                     event: {
-                        entered: "Вошел",
-                        left: "Вышел"
+                        begin: "НАЧАЛО",
+                        end: "ОКОНЧАНИЕ",
+                        denied: "ЗАПРЕЩЕН"
                     },
                     app: {
                         notAuthenticated: "Вы не авторизиованы",
