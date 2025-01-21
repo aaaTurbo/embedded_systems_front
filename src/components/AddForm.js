@@ -15,10 +15,10 @@ export default function AddForm() {
 
     const handleSubmit = (event) => {
         event.preventDefault();
-        request('/api/v1/card/add', auth.token, 'POST', {id: id, name: name}).then(
+        request('/api/v1/card/add', auth.token, 'POST', {cardId: id, username: name}).then(
             res => {
                 if (res) {
-                    dispatch(addCard({id: id, name: name}));
+                    dispatch(addCard({id: res.id, cardId: res.cardId, username: res.userame}));
                 }
             }
         )

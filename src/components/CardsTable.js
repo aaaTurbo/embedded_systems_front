@@ -33,8 +33,9 @@ export default function CardsTable() {
     }, [dispatch, auth]);
 
     const columns = [
-        {name: 'ID', selector: row => row.id, id: 'id'},
-        {name: t('cardsTable.name'), selector: row => row.name},
+        {name: 'ID', selector: row => row.id, id: 'id', width: "3rem"},
+        {name: 'Card Id', selector: row => row.cardId, width: "10rem"},
+        {name: t('cardsTable.name'), selector: row => row.username},
         {name: t('cardsTable.delete'), cell: row => <button onClick={() => handleDeleteCard(row.id)}>X</button>}
     ];
 
