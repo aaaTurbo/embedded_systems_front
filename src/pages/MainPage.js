@@ -3,6 +3,7 @@ import EventsTable from "../components/EventsTable";
 import ControlPanel from "../components/ControlPanel";
 import {useTranslation} from "react-i18next";
 import {useSelector} from "react-redux";
+import Graphics from "../components/Graphics";
 
 export default function MainPage() {
 
@@ -22,6 +23,7 @@ export default function MainPage() {
             </div>
             <div>
                 <ControlPanel/>
+                <Graphics/>
             </div>
         </div>
     </>);
