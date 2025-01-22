@@ -30,10 +30,17 @@ export default function Graphics() {
         for (let i = 0; i < filteredEvents.length; i += 2) {
             let x = filteredEvents[i].at.split("T")[0];
             if (filteredEvents[i + 1]) {
-                chartData.push({
-                    x: x,
-                    value: Math.abs((new Date(filteredEvents[i + 1].at) - new Date(filteredEvents[i].at)) / (1000 * 60 * 60))
-                });
+                if (chartData.some(data => data.x === x)) {
+                    chartData.push({
+                        x: x + " (" + i + ")",
+                        value: Math.abs((new Date(filteredEvents[i + 1].at) - new Date(filteredEvents[i].at)) / (1000 * 60 * 60))
+                    });
+                } else {
+                    chartData.push({
+                        x: x,
+                        value: Math.abs((new Date(filteredEvents[i + 1].at) - new Date(filteredEvents[i].at)) / (1000 * 60 * 60))
+                    });
+                }
             } else {
                 chartData.push({
                     x: x,
