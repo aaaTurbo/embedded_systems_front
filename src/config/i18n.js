@@ -48,6 +48,12 @@ i18n
                         notAuthenticated: "You are not authenticated",
                         login: "Sign in",
                         logout: "Sign out"
+                    },
+                    graphics: {
+                        hours: "Hours",
+                        tag: "Chart",
+                        id: "Card ID",
+                        submit: "Check stat"
                     }
                 }
             },
@@ -94,6 +100,12 @@ i18n
                         notAuthenticated: "Вы не авторизиованы",
                         login: "Войти",
                         logout: "Выйти"
+                    },
+                    graphics: {
+                        hours: "Часы",
+                        tag: "График",
+                        id: "ID карты",
+                        submit: "Проверить"
                     }
                 }
             }

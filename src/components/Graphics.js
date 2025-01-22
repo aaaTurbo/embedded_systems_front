@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, {useRef, useState} from 'react';
 import { useTranslation } from 'react-i18next';
 import '../config/i18n';
 import { useSelector } from 'react-redux';
@@ -8,11 +8,14 @@ import 'anychart/dist/css/anychart-ui.min.css';
 export default function Graphics() {
     const { t } = useTranslation();
     const [cardId, setCardId] = useState('');
+    const graphRef = useRef(null);
 
     const events = useSelector((state) => state.events.data);
 
     const handleInput = () => {
-        console.log(events);
+        if (graphRef.current) {
+            graphRef.current.innerHTML = '';
+        }
 
         let filteredEvents = events
             .filter(event => {
@@ -68,7 +71,7 @@ export default function Graphics() {
                         />
                         <button className="button" onClick={handleInput}>{t('graphics.submit')}</button>
                     </div>
-                    <div id="graph"></div>
+                    <div id="graph" ref={graphRef}></div>
                 </div>
             </div>
         </>
